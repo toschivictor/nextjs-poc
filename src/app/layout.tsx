@@ -17,13 +17,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<header className="bg-white flex items-center justify-center border-b border-gray-100">
-					<h1 className="font-semibold text-2xl p-5">Playground</h1>
-				</header>
-				<main>{children}</main>
-				<footer className="bg-white flex items-center justify-center border-t border-gray-100">
-					<h1 className="font-semibold text-2xl p-5">Playground</h1>
-				</footer>
+				<main className="flex items-center min-h-screen p-4 bg-gray-100 lg:justify-center">
+					{children}
+				</main>
 			</body>
 		</html>
 	);
