@@ -1,4 +1,36 @@
+'use client';
+
+import { Input } from '@/components/input/input';
+import { useInput } from '@/hooks/use-input';
+
 export const UserAuthentication = () => {
+	const emailInput = useInput('');
+	const passwordInput = useInput('');
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		validateInput(emailInput);
+		validateInput(passwordInput);
+
+		console.log(
+			'email ==>',
+			emailInput.value,
+			'password ==>',
+			passwordInput.value
+		);
+	};
+
+	const validateInput = (input: {
+		value: string;
+		setError: (value: boolean) => void;
+	}) => {
+		if (!input.value.trim()) {
+			input.setError(true);
+		} else {
+			input.setError(false);
+		}
+	};
+
 	return (
 		<div className="flex flex-col bg-white shadow-lg md:flex-row md:flex-1 lg:max-w-screen-md">
 			<div className="p-4 py-6 text-white bg-blue-500 md:w-72 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
@@ -26,39 +58,26 @@ export const UserAuthentication = () => {
 				<h3 className="my-4 text-2xl font-semibold text-gray-700">
 					Account Login
 				</h3>
-				<form action="#" className="flex flex-col space-y-5">
-					<div className="flex flex-col space-y-1">
-						<label for="email" className="text-sm font-semibold text-gray-500">
-							Email address
-						</label>
-						<input
-							type="email"
-							id="email"
-							autofocus
-							className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-						/>
-					</div>
-					<div className="flex flex-col space-y-1">
-						<div className="flex items-center justify-between">
-							<label
-								for="password"
-								className="text-sm font-semibold text-gray-500"
-							>
-								Password
-							</label>
-							<a
-								href="#"
-								className="text-sm text-blue-600 hover:underline focus:text-blue-800"
-							>
-								Forgot Password?
-							</a>
-						</div>
-						<input
-							type="password"
-							id="password"
-							className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
-						/>
-					</div>
+				<form onSubmit={handleSubmit} className="flex flex-col space-y-5">
+					<Input
+						type="email"
+						name="email"
+						label="Email address"
+						{...emailInput}
+					/>
+					<Input
+						type="password"
+						name="password"
+						label="Password"
+						{...passwordInput}
+					/>
+					<a
+						href="#"
+						className="text-sm text-blue-600 hover:underline focus:text-blue-800"
+					>
+						Forgot Password?
+					</a>
+
 					<div className="flex items-center space-x-2">
 						<input
 							type="checkbox"
