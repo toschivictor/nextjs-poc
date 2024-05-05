@@ -1,23 +1,32 @@
 'use client';
 
+import { useState } from 'react';
+import { Button } from '@/components/button/button';
 import { Input } from '@/components/input/input';
 import { useInput } from '@/hooks/use-input';
+import { postUserAuthentication } from '@/app/api/user-authentication';
 
 export const UserAuthentication = () => {
 	const emailInput = useInput('');
 	const passwordInput = useInput('');
+	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setIsLoading(true);
 		validateInput(emailInput);
 		validateInput(passwordInput);
 
-		console.log(
-			'email ==>',
-			emailInput.value,
-			'password ==>',
-			passwordInput.value
-		);
+		try {
+			await postUserAuthentication({
+				email: emailInput.value,
+				password: passwordInput.value,
+			});
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	const validateInput = (input: {
@@ -85,19 +94,14 @@ export const UserAuthentication = () => {
 							className="w-4 h-4 transition duration-300 rounded focus:ring-2 focus:ring-offset-0 focus:outline-none focus:ring-blue-200"
 						/>
 						<label
-							for="remember"
+							htmlFor="remember"
 							className="text-sm font-semibold text-gray-500"
 						>
 							Remember me
 						</label>
 					</div>
 					<div>
-						<button
-							type="submit"
-							className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-500 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
-						>
-							Log in
-						</button>
+						<Button label="Log in" primary />
 					</div>
 				</form>
 			</div>
