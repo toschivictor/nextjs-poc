@@ -25,6 +25,10 @@ export const Button = ({
 			{...props}
 		>
 			{label}
+			<div
+				className="w-4 h-4 rounded-full animate-spin
+                    border border-solid border-white border-t-transparent"
+			></div>
 			<style jsx>{`
 				button {
 					background-color: ${backgroundColor};
