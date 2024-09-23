@@ -101,7 +101,7 @@ export const UserAuthentication = () => {
 						</label>
 					</div>
 					<div>
-						<Button label="Log in" primary />
+						<Button label="Log in" primary loading={isLoading} />
 					</div>
 				</form>
 			</div>
