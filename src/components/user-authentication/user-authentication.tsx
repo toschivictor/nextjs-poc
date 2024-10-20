@@ -53,11 +53,11 @@ export const UserAuthentication = () => {
 					</a>
 				</p>
 				<p className="mt-6 text-sm text-center text-gray-300">
-					Read our{' '}
+					Read our
 					<a href="#" className="underline">
 						terms
-					</a>{' '}
-					and{' '}
+					</a>
+					and
 					<a href="#" className="underline">
 						conditions
 					</a>
