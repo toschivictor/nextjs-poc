@@ -9,7 +9,7 @@ interface CarouselProps {
 	images: Image[];
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
+export const Carousel: React.FC<CarouselProps> = ({ images }) => {
 	const [activeIndex, setActiveIndex] = useState(0);
 	const imageRef = useRef<HTMLDivElement>(null);
 
@@ -44,6 +44,8 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
 				))}
 			</div>
 			<button
+				type="button"
+				aria-label="Previous image"
 				className="carousel__button carousel__button--prev focus:outline-none bg-gray-200 hover:bg-gray-300 p-2 rounded-full absolute top-1/2 left-2 md:left-8 transform -translate-y-1/2"
 				onClick={handlePrev}
 			>
@@ -62,6 +64,8 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
+				aria-label="Next image"
 				className="carousel__button carousel__button--next focus:outline-none bg-gray-200 hover:bg-gray-300 p-2 rounded-full absolute top-1/2 right-2 md:right-8 transform -translate-y-1/2"
 				onClick={handleNext}
 			>
@@ -82,5 +86,3 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
 		</div>
 	);
 };
-
-export default Carousel;
